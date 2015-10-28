@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="effects_i_dsp.c" />
+    <ClCompile Include="rate_sse3.c" />
+    <ClCompile Include="xmalloc.c" />
+    <ClCompile Include="ffmpeg\fft.c">
+      <Filter>ffmpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="ffmpeg\rdft.c">
+      <Filter>ffmpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="rate_uni.c" />
+    <ClCompile Include="rate_dbl.c" />
+    <ClCompile Include="rate_flt.c" />
+    <ClCompile Include="rate_sse.c" />
+    <ClCompile Include="ffmpeg\fft_sse.c">
+      <Filter>ffmpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="fft4g\fft4g_dbl.c">
+      <Filter>fft4g</Filter>
+    </ClCompile>
+    <ClCompile Include="fft4g\fft4g_sse3.c">
+      <Filter>fft4g</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="fifo.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="rate_filters_sse3.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="xmalloc.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="util.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ratelib.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="sox.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="sox_i.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="rate_helpers_sse3.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\main.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ffmpeg\fft_ffmpeg.h">
+      <Filter>ffmpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="ffmpeg\ffti.h">
+      <Filter>ffmpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="rate_i.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="rate_filters_dbl.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="rate_filters_flt.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="rate_filters_sse.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="rate_helpers_sse.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="fft4g\fft4g.h">
+      <Filter>fft4g</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="rate_sse3.obj" />
+    <Object Include="rate_sse.obj" />
+    <Object Include="ffmpeg\fft_sse.obj">
+      <Filter>ffmpeg</Filter>
+    </Object>
+    <Object Include="_divdi3.obj" />
+    <Object Include="fft4g\fft4g_sse3.obj">
+      <Filter>fft4g</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="headers">
+      <UniqueIdentifier>{e666858a-026a-4211-a343-56104680f926}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ffmpeg">
+      <UniqueIdentifier>{1dffc6eb-4903-419b-8d0e-6f76234c9a81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fft4g">
+      <UniqueIdentifier>{f7fad8ec-814d-481b-b874-c3da59c0566d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
