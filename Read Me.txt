@@ -1,0 +1,2 @@
+1. I used SOX's Xmalloc and Fifo. If it violates any regulation, I can provide my own version of FIFO.
+2. Currently only support 2 channels
