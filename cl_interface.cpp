@@ -101,6 +101,62 @@ cl_int oclGetPlatformID_nvidia(cl_platform_id* clSelectedPlatformID)
     return CL_SUCCESS;
 }
 
+cl_int oclGetPlatformID_amd(cl_platform_id* clSelectedPlatformID)
+{
+    char chBuffer[1024];
+    cl_uint num_platforms; 
+    cl_platform_id* clPlatformIDs;
+    cl_int ciErrNum;
+    *clSelectedPlatformID = NULL;
+
+    // Get OpenCL platform count
+    ciErrNum = clGetPlatformIDs (0, NULL, &num_platforms);
+    if (ciErrNum != CL_SUCCESS)
+    {
+        return -1000;
+    }
+    else 
+    {
+        if(num_platforms == 0)
+        {
+            return -2000;
+        }
+        else 
+        {
+            // if there's a platform or more, make space for ID's
+            if ((clPlatformIDs = (cl_platform_id*)malloc(num_platforms * sizeof(cl_platform_id))) == NULL)
+            {
+                return -3000;
+            }
+
+            // get platform info for each platform and trap the NVIDIA platform if found
+            ciErrNum = clGetPlatformIDs (num_platforms, clPlatformIDs, NULL);
+            for(cl_uint i = 0; i < num_platforms; ++i)
+            {
+                ciErrNum = clGetPlatformInfo (clPlatformIDs[i], CL_PLATFORM_NAME, 1024, &chBuffer, NULL);
+                if(ciErrNum == CL_SUCCESS)
+                {
+                    if(strstr(chBuffer, "AMD") != NULL)
+                    {
+                        *clSelectedPlatformID = clPlatformIDs[i];
+                        break;
+                    }
+                }
+            }
+
+            // default to zeroeth platform if NVIDIA not found
+            if(*clSelectedPlatformID == NULL)
+            {
+                *clSelectedPlatformID = clPlatformIDs[0];
+            }
+
+            free(clPlatformIDs);
+        }
+    }
+
+    return CL_SUCCESS;
+}
+
 int platform_initial()
 {
 	cl_int err;
@@ -114,7 +170,8 @@ int platform_initial()
     cl_context_properties context_properties[3] = {CL_CONTEXT_PLATFORM, (cl_context_properties)intel_platform_id, NULL };*/
 	//nvidia
 	cl_platform_id platform_id=0;
-	platform_id=GetIntelOCLPlatform_intel();
+	//platform_id=GetIntelOCLPlatform_intel();
+	oclGetPlatformID_amd(&platform_id);
     if( platform_id == NULL )
     {
         printf("ERROR: Failed to find OpenCL platform.\n");
@@ -122,7 +179,7 @@ int platform_initial()
     }
     cl_context_properties context_properties[3] = {CL_CONTEXT_PLATFORM, (cl_context_properties)platform_id, NULL };
 	//nvidia
-	__context=clCreateContextFromType(context_properties, CL_DEVICE_TYPE_CPU, NULL, NULL, NULL);
+	__context=clCreateContextFromType(context_properties, CL_DEVICE_TYPE_GPU, NULL, NULL, NULL);
 	clGetContextInfo(__context,CL_CONTEXT_DEVICES,0,NULL,&cb);
 	__devices=(cl_device_id *)malloc(cb);
 	clGetContextInfo(__context,CL_CONTEXT_DEVICES,cb,__devices,NULL);

@@ -40,7 +40,7 @@ void generate_table(int sample_half,float factor/*org_sr/des_sr*/,float *sinc_ta
 	double index = 0.0;
 	for(int i = 0; i < n; i++)
 	{
-		sinc_table[i] = sinc_(index,factor) * windows_(index,sample_half);
+		sinc_table[i] = (float)((index == 0) ? 1.0 : sinc_(index,factor) * windows_(index,sample_half));
 		index += delta;
 	}
 }

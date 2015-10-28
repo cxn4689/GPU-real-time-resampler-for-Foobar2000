@@ -1,4 +1,4 @@
-#define _table_size 65538
+#define _table_size 65537
 
 #define prec_ 512.0
 
