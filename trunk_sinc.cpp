@@ -53,7 +53,7 @@ float lookup(float t,float *sinc_table)//normallized, real t
 	*t_ += exp_plus;//t*128*/
 	//unsigned int *t_ = reinterpret_cast<unsigned int *>(&t);
 	//*t_ &= 0x7fffffff;//convert to positive number
-	t = abs(t);//only get from half
+	t = fabs(t);//only get from half
 	t *= prec_;
 	int index = (int)(t);//get index
 	if(index > _table_size) return 0.0;

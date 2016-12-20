@@ -80,7 +80,7 @@ cl_int oclGetPlatformID_nvidia(cl_platform_id* clSelectedPlatformID)
                 ciErrNum = clGetPlatformInfo (clPlatformIDs[i], CL_PLATFORM_NAME, 1024, &chBuffer, NULL);
                 if(ciErrNum == CL_SUCCESS)
                 {
-                    if(strstr(chBuffer, "NVIDIA") != NULL)
+                    if(strstr(chBuffer, "NVIDIA CUDA") != NULL)
                     {
                         *clSelectedPlatformID = clPlatformIDs[i];
                         break;
@@ -171,7 +171,7 @@ int platform_initial()
 	//nvidia
 	cl_platform_id platform_id=0;
 	//platform_id=GetIntelOCLPlatform_intel();
-	oclGetPlatformID_amd(&platform_id);
+	oclGetPlatformID_nvidia(&platform_id);
     if( platform_id == NULL )
     {
         printf("ERROR: Failed to find OpenCL platform.\n");

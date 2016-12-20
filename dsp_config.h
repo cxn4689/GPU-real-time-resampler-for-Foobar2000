@@ -21,7 +21,7 @@
 //#include "../ATLhelpers/ATLhelpers.h"
 //#include "../SDK/foobar2000.h"
 #include "ATLhelpers.h"
-#include "foobar2000.h"
+#include <foobar2000.h>
 
 #include "resource.h"
 

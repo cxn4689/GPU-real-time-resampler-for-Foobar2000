@@ -313,7 +313,7 @@ int __my_get_data_and_src__backup(_data_type_ *in_buf,int in_size,_data_type_ *o
 				int vL=(nId>=0&&nId<=buf_fix_size-1)?buffer_process[nId*chn_num]:0;
 				int abs_Index=nR+i;
 				int index_f=abs_Index;
-				nIVL+=(double)vL*sinc(abs(ti-(double)index_f/(double)ori_sample_rate),ori_sample_rate)*windows(abs(ti-(double)index_f/(double)ori_sample_rate),(double)w_hn/(double)ori_sample_rate);
+				nIVL+=(double)vL*sinc(fabs(ti-(double)index_f/(double)ori_sample_rate),ori_sample_rate)*windows(fabs(ti-(double)index_f/(double)ori_sample_rate),(double)w_hn/(double)ori_sample_rate);
 			}
 			for(int i=0;i<w_hn;i++){//right wing
 				//window size 32
@@ -321,7 +321,7 @@ int __my_get_data_and_src__backup(_data_type_ *in_buf,int in_size,_data_type_ *o
 				int vL=(nId>=0&&nId<=buf_fix_size-1)?buffer_process[nId*chn_num]:0;
 				int abs_Index=nL-i;
 				int index_f=abs_Index;
-				nIVL+=(double)vL*sinc(abs(ti-(double)index_f/(double)ori_sample_rate),ori_sample_rate)*windows(abs(ti-(double)index_f/(double)ori_sample_rate),(double)w_hn/(double)ori_sample_rate);
+				nIVL+=(double)vL*sinc(fabs(ti-(double)index_f/(double)ori_sample_rate),ori_sample_rate)*windows(fabs(ti-(double)index_f/(double)ori_sample_rate),(double)w_hn/(double)ori_sample_rate);
 			}
 			out_buf[out_sample_count*chn_num]=(_data_type_)nIVL;
 		}//left channel
@@ -334,7 +334,7 @@ int __my_get_data_and_src__backup(_data_type_ *in_buf,int in_size,_data_type_ *o
 				int vL=(nId>=0&&nId<=buf_fix_size-1)?buffer_process[nId*chn_num+1]:0;
 				int abs_Index=nR+i;
 				int index_f=abs_Index;
-				nIVL+=(double)vL*sinc(abs(ti-(double)index_f/(double)ori_sample_rate),ori_sample_rate)*windows(abs(ti-(double)index_f/(double)ori_sample_rate),(double)w_hn/(double)ori_sample_rate);
+				nIVL+=(double)vL*sinc(fabs(ti-(double)index_f/(double)ori_sample_rate),ori_sample_rate)*windows(fabs(ti-(double)index_f/(double)ori_sample_rate),(double)w_hn/(double)ori_sample_rate);
 			}
 			for(int i=0;i<w_hn;i++){//right wing
 				//window size 32
@@ -342,7 +342,7 @@ int __my_get_data_and_src__backup(_data_type_ *in_buf,int in_size,_data_type_ *o
 				int vL=(nId>=0&&nId<=buf_fix_size-1)?buffer_process[nId*chn_num+1]:0;
 				int abs_Index=nL-i;
 				int index_f=abs_Index;
-				nIVL+=(double)vL*sinc(abs(ti-(double)index_f/(double)ori_sample_rate),ori_sample_rate)*windows(abs(ti-(double)index_f/(double)ori_sample_rate),(double)w_hn/(double)ori_sample_rate);
+				nIVL+=(double)vL*sinc(fabs(ti-(double)index_f/(double)ori_sample_rate),ori_sample_rate)*windows(fabs(ti-(double)index_f/(double)ori_sample_rate),(double)w_hn/(double)ori_sample_rate);
 			}
 			out_buf[out_sample_count*chn_num+1]=(_data_type_)nIVL;
 		}//right channel

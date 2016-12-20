@@ -1,4 +1,6 @@
+#ifdef _intel_cpu_
 #pragma OPENCL EXTENSION cl_khr_fp64 : enable
+#endif
 
 #define _data_type_ float
 #define buf_fix_size 4096
@@ -36,9 +38,10 @@ double sinc_GPU(double t,double fs,double ratio){ //ratio=ori/des
 	}
 }
 #define prec_ 512
-#define _table_size 65538
+#define _table_size 65537
 
-inline double lookup(double t,_data_type_ *sinc_table,_data_type_ ratio)//normallized, real t
+
+inline double lookup(double t,__global _data_type_ *sinc_table,_data_type_ ratio)//normallized, real t
 {
 	//normalized Ts = 1, Fs = 1;
 	//interval 1/pi/30
@@ -65,7 +68,7 @@ inline double lookup(double t,_data_type_ *sinc_table,_data_type_ ratio)//normal
 __kernel void interpolation(__global _data_type_ *buffer_process,int buf_size,__global _data_type_ *out_buf,int out_size,
 int beg_index,int out_samples,int chn_num,int ori_sr,int des_sr,int w_hn, __global _data_type_ *sinc_table_)
 {
-	_data_type_ *sinc_table = (_data_type_ *)sinc_table_;
+	__global _data_type_ *sinc_table = (__global _data_type_ *)sinc_table_;
 	int ix=get_global_id(0);//destination frame id
 	if(ix>out_size) return;
 	double ratio=(double)ori_sr/(double)des_sr;
