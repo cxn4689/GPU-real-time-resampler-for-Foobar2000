@@ -170,8 +170,20 @@ int platform_initial()
     cl_context_properties context_properties[3] = {CL_CONTEXT_PLATFORM, (cl_context_properties)intel_platform_id, NULL };*/
 	//nvidia
 	cl_platform_id platform_id=0;
+#if 0
 	//platform_id=GetIntelOCLPlatform_intel();
 	oclGetPlatformID_nvidia(&platform_id);
+#else
+	oclGetPlatformID_nvidia(&platform_id);//priority NVIDIA>AMD>INTEL
+	if (platform_id == NULL)
+	{
+		oclGetPlatformID_amd(&platform_id);
+		if (platform_id == NULL)
+		{
+			platform_id = GetIntelOCLPlatform_intel();
+		}
+	}
+#endif
     if( platform_id == NULL )
     {
         printf("ERROR: Failed to find OpenCL platform.\n");
